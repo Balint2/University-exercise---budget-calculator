@@ -12,13 +12,13 @@ h1 {
     margin-bottom: 40px;
 }
 
-/* Alcímek */
-h2 {
-    font-size: 40px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    
+.section-container h2 {
+    margin: 0 0 20px 0;
+    font-size: 42px;
+    text-align: center;
 }
+
+/* Alcímek */
 
 /* Kártya stílus - szekciók köré */
 .section-container {
@@ -29,17 +29,13 @@ h2 {
 
     padding: 30px;
     margin: 50px auto;
-    max-width: 1600px; /* Maximális szélesség, hogy ne legyen túl széles */
+    max-width: 1700px; /* Maximális szélesség, hogy ne legyen túl széles */
     display: flex;
     flex-direction: column;
     align-items: center; /* Középre igazítás */
 }
 
-.section-container h2 {
-    margin: 0 0 20px 0;
-    font-size: 36px;
-    text-align: center;
-}
+
 
 /* Bevitel elemek */
 .input-container {
@@ -51,7 +47,7 @@ h2 {
     flex-wrap: wrap;
 
     gap: 10px;
-    margin: 20px 0;
+    margin: 30px 0;
     width: 100%; /* Vegye fel a teljes szélességet */
 }
 
@@ -61,22 +57,22 @@ input[type="text"], input[type="number"], select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 20px;
     min-width: 150px; /* Alap minimum méret */
     margin-right: 20px;
 }
 
 /* Label */
 label {
-    margin-left: 10px;
-    font-size: 20px;
+    margin-left: 0;
+    font-size: 25px;
 }
 
 /* Gombok alap */
 button {
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
     padding: 10px 20px;
     color: white;
@@ -115,7 +111,7 @@ button:hover{
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 21px;
 }
 
 .addButton:hover {
