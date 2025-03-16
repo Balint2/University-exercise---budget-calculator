@@ -210,10 +210,10 @@ function ShowStatistics(datas)
 
     datas.forEach(data => {
         if (data.totalAmount > 0) {
-            addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / 1000)
+            addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / 2000)
         }
         else {
-            addColumn(upperGridContainer, Colors.WHITE, data.totalAmount / 1000)
+            addColumn(upperGridContainer, Colors.WHITE, 10)
         }
 
     });
@@ -241,10 +241,10 @@ function ShowStatistics(datas)
 
     datas.forEach(data => {
         if (data.totalAmount < 0) {
-            addColumn(lowerGridContainer, Colors.RED, data.totalAmount / 1000)
+            addColumn(lowerGridContainer, Colors.RED, -data.totalAmount / 2000)
         }
         else {
-            addColumn(lowerGridContainer, Colors.WHITE, data.totalAmount / 1000)
+            addColumn(lowerGridContainer, Colors.WHITE, 10)
         }
 
     });
@@ -265,17 +265,20 @@ function ShowStatistics(datas)
     document.body.appendChild(statisticsContainer)
 }
 
-function addColumn(grid, color, amount) {
+function addColumn(grid, color, height) {
     const column = document.createElement('div');
     if (color == Colors.RED) {
         column.classList.add('lowerColumn')
+        column.style.height = height + 'px'
     }
     else if (color == Colors.GREEN) {
         column.classList.add('upperColumn')
+        column.style.height = height + 'px'
     }
     else
     {
         column.classList.add('emptyColumn')
+        column.style.height = '10px'
     }
     grid.appendChild(column)
 }
