@@ -253,11 +253,22 @@ function ShowStatistics(datas)
     document.body.appendChild(statisticsContainer)
 }
 
+const months = [
+    'január', 'február', 'március', 'április', 'május', 'június',
+    'július', 'augusztus', 'szeptember', 'október', 'november', 'december'
+];
+
 function addColumn(grid, color, height, transformAmount, data) {
     const column = document.createElement('div');
     if (color == Colors.RED) {
         column.classList.add('lowerColumn')
         column.style.height = height + 'px'
+
+        const dateText = document.createElement('div');
+        dateText.classList.add('dateText')
+        dateText.innerHTML = data.year + '<br>' + months[data.month-1]
+        column.appendChild(dateText)
+        dateText.style.transform = 'translate(-25%, -40px)';
     }
     else if (color == Colors.GREEN) {
         column.classList.add('upperColumn')
@@ -266,17 +277,9 @@ function addColumn(grid, color, height, transformAmount, data) {
 
         const amountText = document.createElement('div');
         amountText.classList.add('amountText')
-        amountText.innerHTML = "200 000 ft"
+        amountText.innerHTML = data.totalAmount.toLocaleString('hu-HU') + ' ft'
         column.appendChild(amountText)
-
-
-
-        amountText.style.transform = 'translate(-10%, -20px)';
-        //amountText.style.transform = 'translateY(-20px)';
-
-
-
-
+        amountText.style.transform = 'translate(-20%, -20px)';
     }
     else
     {

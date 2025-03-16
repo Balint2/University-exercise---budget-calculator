@@ -147,6 +147,8 @@ button:hover{
 
 .diagram-container {
     margin-top: 100px !important;
+    padding-top: 50px;
+    padding-bottom: 50px
 }
 
 
@@ -162,7 +164,8 @@ button:hover{
 
 
 .upperColumn {
-    background-color: lightgreen
+    background-color: lightgreen;
+
 }
 
 .lowerColumn {
@@ -182,12 +185,19 @@ button:hover{
     margin: 0 auto; /* auto: középre */
 }
 
-
-.amountText {
+.amountText, .dateText {
     text-align: center;
     align-items: center;
-    width: 150%
 }
+
+.amountText {
+    width: 200%
+}
+
+.dateText {
+    width: 200%
+}
+
 /* Reszponzív */
 @media (max-width: 768px) {
     h1 {
