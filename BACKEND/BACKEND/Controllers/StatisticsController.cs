@@ -12,6 +12,7 @@ namespace BACKEND.Controllers
 
             Console.WriteLine("Valami érkezett");
 
+            incomes = incomes.Where(x => (x.Year > 0 && x.Amount > 0)).ToList();
 
             if (incomes == null || !incomes.Any())
                 return BadRequest("Nincs adat!");
