@@ -262,12 +262,19 @@ function addColumn(grid, color, height, transformAmount, data) {
     else if (color == Colors.GREEN) {
         column.classList.add('upperColumn')
         column.style.height = height + 'px'
-        column.style.transform = transform = 'translateY(' + transformAmount + 'px)';
+        column.style.transform = 'translateY(' + transformAmount + 'px)';
 
         const amountText = document.createElement('div');
         amountText.classList.add('amountText')
-        amountText.innerHTML = "Sajt"
+        amountText.innerHTML = "200 000 ft"
         column.appendChild(amountText)
+
+
+
+        amountText.style.transform = 'translate(-10%, -20px)';
+        //amountText.style.transform = 'translateY(-20px)';
+
+
 
 
     }

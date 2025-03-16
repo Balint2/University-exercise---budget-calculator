@@ -183,6 +183,11 @@ button:hover{
 }
 
 
+.amountText {
+    text-align: center;
+    align-items: center;
+    width: 150%
+}
 /* Reszponzív */
 @media (max-width: 768px) {
     h1 {
@@ -207,6 +212,7 @@ button:hover{
         width: 100%;
     }
 }
+
 
 
 
