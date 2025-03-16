@@ -142,6 +142,48 @@ button:hover{
     background-color: #001180;
 }
 
+
+
+
+.diagram-container {
+    margin-top: 100px !important;
+}
+
+
+.grid-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 100px); /* 3 oszlop, mind 100px */
+    gap: 10px !important;
+}
+
+.upperColumn, .lowerColumn {
+    height: 600px;
+    width: 50px;
+}
+
+
+.upperColumn {
+    background-color: lightgreen
+}
+
+.lowerColumn {
+    background-color: indianred;
+}
+
+
+.emptyColumn {
+    background-color: white;
+}
+
+
+.line {
+    height: 2px;
+    background-color: black;
+    width: 100%; /* vagy pl. 50% ha rövidebbet akarsz */
+    margin: 0 auto; /* auto: középre */
+}
+
+
 /* Reszponzív */
 @media (max-width: 768px) {
     h1 {
@@ -166,3 +208,6 @@ button:hover{
         width: 100%;
     }
 }
+
+
+

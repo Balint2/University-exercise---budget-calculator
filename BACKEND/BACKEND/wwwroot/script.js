@@ -136,7 +136,6 @@ document.getElementById('showButton').addEventListener('click', function () {
         let amount = parseInt(inputs[2].value);
 
 
-        // Csak ha ki van töltve, hogy ne küldj üreset
         if (!isNaN(year) && !isNaN(month) && !isNaN(amount)) {
             dataToSend.push({
                 year: year,
@@ -158,7 +157,6 @@ document.getElementById('showButton').addEventListener('click', function () {
         let amount = parseInt(inputs[2].value);
 
 
-        // Csak ha ki van töltve, hogy ne küldj üreset
         if (!isNaN(year) && !isNaN(month) && !isNaN(amount)) {
             dataToSend.push({
                 year: year,
@@ -179,16 +177,105 @@ document.getElementById('showButton').addEventListener('click', function () {
     })
     .then(response => response.json())
         .then(data => {
-            console.log("Beérkezett adatok:", data);
-            // itt tudod feldolgozni a listát pl. kiírás
+            //console.log("Beérkezett adatok:", data);
+            ShowStatistics(data);
         })
-    /*
-    .then(response => {
-        if (response.ok) {
-            alert("Sikeres mentés!");
-        } else {
-            alert("Hiba történt a küldés során.");
-        }
-    })*/
     .catch(error => console.error('Hiba:', error));
 });
+
+
+const Colors = {
+    RED: 'red',
+    GREEN: 'green',
+    WHITE: 'white'
+};
+
+function ShowStatistics(datas)
+{
+    const diagram = document.querySelector('.diagram-container');
+    if (diagram) {
+        diagram.remove();
+    }
+    const statisticsContainer = document.createElement('div');
+    statisticsContainer.classList.add('section-container');
+    statisticsContainer.classList.add('diagram-container');
+
+
+
+
+
+    const upperGridContainer = document.createElement('div');
+    upperGridContainer.classList.add('grid-container');
+
+
+    datas.forEach(data => {
+        if (data.totalAmount > 0) {
+            addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / 1000)
+        }
+        else {
+            addColumn(upperGridContainer, Colors.WHITE, data.totalAmount / 1000)
+        }
+
+    });
+
+
+    statisticsContainer.appendChild(upperGridContainer)
+
+
+
+
+
+
+    const line = document.createElement('div');
+    line.classList.add('line')
+    statisticsContainer.appendChild(line)
+
+
+
+
+
+    const lowerGridContainer = document.createElement('div');
+    lowerGridContainer.classList.add('grid-container');
+
+
+
+    datas.forEach(data => {
+        if (data.totalAmount < 0) {
+            addColumn(lowerGridContainer, Colors.RED, data.totalAmount / 1000)
+        }
+        else {
+            addColumn(lowerGridContainer, Colors.WHITE, data.totalAmount / 1000)
+        }
+
+    });
+
+
+    /*
+    datas.filter(data => data.totalAmount < 0).forEach(data => {
+        addColumn(lowerGridContainer, false, -data.totalAmount / 1000)
+    });*/
+
+
+    statisticsContainer.appendChild(lowerGridContainer)
+
+
+
+
+
+    document.body.appendChild(statisticsContainer)
+}
+
+function addColumn(grid, color, amount) {
+    const column = document.createElement('div');
+    if (color == Colors.RED) {
+        column.classList.add('lowerColumn')
+    }
+    else if (color == Colors.GREEN) {
+        column.classList.add('upperColumn')
+    }
+    else
+    {
+        column.classList.add('emptyColumn')
+    }
+    grid.appendChild(column)
+}
