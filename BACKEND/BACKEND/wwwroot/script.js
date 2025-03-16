@@ -211,11 +211,11 @@ function ShowStatistics(datas)
     const maxAmount = Math.max(...datas.map(item => item.totalAmount));
 
     datas.forEach(data => {
-        if (data.totalAmount > 0) {
-            addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / amountHeightRatio, (maxAmount - data.totalAmount) / amountHeightRatio)
+        if (data.totalAmount >= 0) {
+            addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / amountHeightRatio, (maxAmount - data.totalAmount) / amountHeightRatio, data)
         }
         else {
-            addColumn(upperGridContainer, Colors.WHITE, 10, 0)
+            addColumn(upperGridContainer, Colors.WHITE, 10, 0, data)
         }
 
     });
@@ -238,10 +238,10 @@ function ShowStatistics(datas)
 
     datas.forEach(data => {
         if (data.totalAmount < 0) {
-            addColumn(lowerGridContainer, Colors.RED, -data.totalAmount / amountHeightRatio, 0)
+            addColumn(lowerGridContainer, Colors.RED, -data.totalAmount / amountHeightRatio, 0, data)
         }
         else {
-            addColumn(lowerGridContainer, Colors.WHITE, 10, 0)
+            addColumn(lowerGridContainer, Colors.WHITE, 10, 0, data)
         }
 
     });
@@ -253,7 +253,7 @@ function ShowStatistics(datas)
     document.body.appendChild(statisticsContainer)
 }
 
-function addColumn(grid, color, height, transformAmount) {
+function addColumn(grid, color, height, transformAmount, data) {
     const column = document.createElement('div');
     if (color == Colors.RED) {
         column.classList.add('lowerColumn')
@@ -263,6 +263,13 @@ function addColumn(grid, color, height, transformAmount) {
         column.classList.add('upperColumn')
         column.style.height = height + 'px'
         column.style.transform = transform = 'translateY(' + transformAmount + 'px)';
+
+        const amountText = document.createElement('div');
+        amountText.classList.add('amountText')
+        amountText.innerHTML = "Sajt"
+        column.appendChild(amountText)
+
+
     }
     else
     {
