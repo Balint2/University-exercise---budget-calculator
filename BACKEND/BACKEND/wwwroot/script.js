@@ -192,6 +192,7 @@ const Colors = {
 
 function ShowStatistics(datas)
 {
+    const amountHeightRatio = 2000
     const diagram = document.querySelector('.diagram-container');
     if (diagram) {
         diagram.remove();
@@ -207,13 +208,14 @@ function ShowStatistics(datas)
     const upperGridContainer = document.createElement('div');
     upperGridContainer.classList.add('grid-container');
 
+    const maxAmount = Math.max(...datas.map(item => item.totalAmount));
 
     datas.forEach(data => {
         if (data.totalAmount > 0) {
-            addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / 2000)
+            addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / amountHeightRatio, (maxAmount - data.totalAmount) / amountHeightRatio)
         }
         else {
-            addColumn(upperGridContainer, Colors.WHITE, 10)
+            addColumn(upperGridContainer, Colors.WHITE, 10, 0)
         }
 
     });
@@ -223,14 +225,9 @@ function ShowStatistics(datas)
 
 
 
-
-
-
     const line = document.createElement('div');
     line.classList.add('line')
     statisticsContainer.appendChild(line)
-
-
 
 
 
@@ -241,31 +238,22 @@ function ShowStatistics(datas)
 
     datas.forEach(data => {
         if (data.totalAmount < 0) {
-            addColumn(lowerGridContainer, Colors.RED, -data.totalAmount / 2000)
+            addColumn(lowerGridContainer, Colors.RED, -data.totalAmount / amountHeightRatio, 0)
         }
         else {
-            addColumn(lowerGridContainer, Colors.WHITE, 10)
+            addColumn(lowerGridContainer, Colors.WHITE, 10, 0)
         }
 
     });
 
 
-    /*
-    datas.filter(data => data.totalAmount < 0).forEach(data => {
-        addColumn(lowerGridContainer, false, -data.totalAmount / 1000)
-    });*/
 
 
     statisticsContainer.appendChild(lowerGridContainer)
-
-
-
-
-
     document.body.appendChild(statisticsContainer)
 }
 
-function addColumn(grid, color, height) {
+function addColumn(grid, color, height, transformAmount) {
     const column = document.createElement('div');
     if (color == Colors.RED) {
         column.classList.add('lowerColumn')
@@ -274,6 +262,7 @@ function addColumn(grid, color, height) {
     else if (color == Colors.GREEN) {
         column.classList.add('upperColumn')
         column.style.height = height + 'px'
+        column.style.transform = transform = 'translateY(' + transformAmount + 'px)';
     }
     else
     {
