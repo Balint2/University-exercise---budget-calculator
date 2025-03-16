@@ -265,6 +265,14 @@ function addColumn(grid, color, height, transformAmount, data) {
         column.style.position = 'relative';
         column.style.height = height + 'px'
 
+        const amountText = document.createElement('div');
+        amountText.classList.add('amountText')
+        amountText.innerHTML = data.totalAmount.toLocaleString('hu-HU') + ' ft'
+        column.appendChild(amountText)
+        amountText.style.position = 'absolute';
+        amountText.style.bottom = '0';
+        amountText.style.transform = 'translate(-25%, 20px)';
+
         const dateText = document.createElement('div');
         dateText.classList.add('dateText')
         dateText.innerHTML = data.year + '<br>' + months[data.month-1]
