@@ -17,6 +17,14 @@ namespace BACKEND.Controllers
             if (incomes == null || !incomes.Any())
                 return BadRequest("Nincs adat!");
 
+            foreach (var income in incomes)
+            {
+                if (income.IsExpense)
+                {
+                    income.Amount = -income.Amount;
+                }
+            }
+
 
             var structuredIncomes = incomes
     .GroupBy(income => new { income.Year, income.Month }).Select(x => new

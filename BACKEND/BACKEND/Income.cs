@@ -9,5 +9,7 @@
 
         public decimal Amount { get; set; }
 
+        public bool IsExpense { get; set; }
+
     }
 }

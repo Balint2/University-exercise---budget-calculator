@@ -122,11 +122,11 @@ addExpense()
 
 
 
-document.getElementById('showButton').addEventListener('click', function() {
-    const rows = incomesDiv.getElementsByClassName('input-container');
+document.getElementById('showButton').addEventListener('click', function () {
     let dataToSend = [];
 
-    for (let row of rows) {
+    const incomeRows = incomesDiv.getElementsByClassName('input-container');
+    for (let row of incomeRows) {
         const inputs = row.getElementsByTagName('input');
         let year = parseInt(inputs[0].value);
 
@@ -141,7 +141,30 @@ document.getElementById('showButton').addEventListener('click', function() {
             dataToSend.push({
                 year: year,
                 month: month,
-                amount: amount
+                amount: amount,
+                isExpense: false
+            });
+        }
+    }
+
+    expenseRows = expensesDiv.getElementsByClassName('input-container');
+    for (let row of expenseRows) {
+        const inputs = row.getElementsByTagName('input');
+        let year = parseInt(inputs[0].value);
+
+
+        let month = row.getElementsByTagName('select')[0].value;
+        let type = inputs[1].value;
+        let amount = parseInt(inputs[2].value);
+
+
+        // Csak ha ki van töltve, hogy ne küldj üreset
+        if (!isNaN(year) && !isNaN(month) && !isNaN(amount)) {
+            dataToSend.push({
+                year: year,
+                month: month,
+                amount: amount,
+                isExpense: true
             });
         }
     }
