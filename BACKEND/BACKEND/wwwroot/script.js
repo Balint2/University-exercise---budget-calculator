@@ -262,6 +262,7 @@ function addColumn(grid, color, height, transformAmount, data) {
     const column = document.createElement('div');
     if (color == Colors.RED) {
         column.classList.add('lowerColumn')
+        column.style.position = 'relative';
         column.style.height = height + 'px'
 
         const dateText = document.createElement('div');
@@ -272,6 +273,7 @@ function addColumn(grid, color, height, transformAmount, data) {
     }
     else if (color == Colors.GREEN) {
         column.classList.add('upperColumn')
+        column.style.position = 'relative';
         column.style.height = height + 'px'
         column.style.transform = 'translateY(' + transformAmount + 'px)';
 
@@ -280,6 +282,15 @@ function addColumn(grid, color, height, transformAmount, data) {
         amountText.innerHTML = data.totalAmount.toLocaleString('hu-HU') + ' ft'
         column.appendChild(amountText)
         amountText.style.transform = 'translate(-20%, -20px)';
+
+        const dateText = document.createElement('div');
+        dateText.classList.add('dateText')
+        dateText.innerHTML = data.year + '<br>' + months[data.month - 1]
+        column.appendChild(dateText)
+        dateText.style.position = 'absolute';
+        dateText.style.bottom = '0'; // szülő alja
+        dateText.style.transform = 'translate(-25%, 45px)';
+
     }
     else
     {
