@@ -137,7 +137,7 @@ document.getElementById('showButton').addEventListener('click', function() {
 
 
         // Csak ha ki van töltve, hogy ne küldj üreset
-        if (isNaN(year) && isNaN(month) && isNaN(amount)) {
+        if (!isNaN(year) && !isNaN(month) && !isNaN(amount)) {
             dataToSend.push({
                 year: year,
                 month: month,
@@ -147,19 +147,25 @@ document.getElementById('showButton').addEventListener('click', function() {
     }
 
     // Küldés API-ra
-    fetch('https://localhost:5001/api/incomes', {
+    fetch('http://localhost:5000/api/statistics', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(dataToSend)
     })
+    .then(response => response.json())
+        .then(data => {
+            console.log("Beérkezett adatok:", data);
+            // itt tudod feldolgozni a listát pl. kiírás
+        })
+    /*
     .then(response => {
         if (response.ok) {
             alert("Sikeres mentés!");
         } else {
             alert("Hiba történt a küldés során.");
         }
-    })
+    })*/
     .catch(error => console.error('Hiba:', error));
 });

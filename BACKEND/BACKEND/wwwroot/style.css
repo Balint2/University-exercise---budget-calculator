@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+/* Főcím */
+h1 {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-container h2 {
+    margin: 0 0 20px 0;
+    font-size: 42px;
+    text-align: center;
+}
+
+/* Alcímek */
+
+/* Kártya stílus - szekciók köré */
+.section-container {
+    background-color: white;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    padding: 30px;
+    margin: 50px auto;
+    max-width: 1400px; /* Maximális szélesség, hogy ne legyen túl széles */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Középre igazítás */
+}
+
+
+
+/* Bevitel elemek */
+.input-container {
+    display: flex;
+    align-items: center;
+    /*gap: 15px;
+    margin: 15px 0;*/
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+    margin: 30px 0;
+    width: 100%; /* Vegye fel a teljes szélességet */
+}
+
+
+/* Input és Select */
+input[type="text"], input[type="number"], select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    min-width: 50px; /* Alap minimum méret */
+    margin-right: 20px;
+}
+
+/* Label */
+label {
+    margin-left: 0;
+    font-size: 20px;
+}
+
+/* Gombok alap */
+button {
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    color: white;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    
+}
+
+button:hover{
+    transform: scale(1.05);
+}
+
+/* Törlés gomb */
+.deleteButton {
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ff4d4d;
+}
+
+.deleteButton:hover {
+    background-color: #e60000;
+}
+
+.deleteButton:active {
+    background-color: #990000;
+}
+
+/* Új bevétel/kiadás */
+.addButton {
+    margin-bottom: 20px;
+    background-color: #888;
+
+    margin-top: 20px;
+    padding: 12px 24px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 21px;
+}
+
+.addButton:hover {
+    background-color: #666;
+}
+
+.addButton:active {
+    background-color: #444;
+}
+
+/* Statisztika */
+#showButton {
+    font-size: 28px;
+    padding: 20px 50px;
+    border-radius: 15px;
+    display: block;
+    background-color: #007bff;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+
+    margin: 50px auto;
+}
+
+#showButton:hover {
+    background-color: #0056b3;
+}
+
+#showButton:active {
+    background-color: #001180;
+}
+
+/* Reszponzív */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .input-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    input[type="text"], input[type="number"], select {
+        min-width: unset;
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
