@@ -192,7 +192,6 @@ const Colors = {
 
 function ShowStatistics(datas)
 {
-    const amountHeightRatio = 2000
     const diagram = document.querySelector('.diagram-container');
     if (diagram) {
         diagram.remove();
@@ -209,6 +208,10 @@ function ShowStatistics(datas)
     upperGridContainer.classList.add('grid-container');
 
     const maxAmount = Math.max(...datas.map(item => item.totalAmount));
+    const minAmount = Math.min(...datas.map(item => item.totalAmount));
+
+    biggest = Math.max(maxAmount, -minAmount)
+    const amountHeightRatio = biggest/350 //ez azt jelenti, hogy az osztó pixel lesz a legnagyobb magassága
 
     datas.forEach(data => {
         if (data.totalAmount >= 0) {
@@ -262,14 +265,12 @@ function addColumn(grid, color, height, transformAmount, data) {
     const column = document.createElement('div');
     if (color == Colors.RED) {
         column.classList.add('lowerColumn')
-        column.style.position = 'relative';
         column.style.height = height + 'px'
 
         const amountText = document.createElement('div');
         amountText.classList.add('amountText')
         amountText.innerHTML = data.totalAmount.toLocaleString('hu-HU') + ' ft'
         column.appendChild(amountText)
-        amountText.style.position = 'absolute';
         amountText.style.bottom = '0';
         amountText.style.transform = 'translate(-25%, 20px)';
 
@@ -277,11 +278,10 @@ function addColumn(grid, color, height, transformAmount, data) {
         dateText.classList.add('dateText')
         dateText.innerHTML = data.year + '<br>' + months[data.month-1]
         column.appendChild(dateText)
-        dateText.style.transform = 'translate(-25%, -40px)';
+        dateText.style.transform = 'translate(-25%, -35px)';
     }
     else if (color == Colors.GREEN) {
         column.classList.add('upperColumn')
-        column.style.position = 'relative';
         column.style.height = height + 'px'
         column.style.transform = 'translateY(' + transformAmount + 'px)';
 
@@ -289,15 +289,15 @@ function addColumn(grid, color, height, transformAmount, data) {
         amountText.classList.add('amountText')
         amountText.innerHTML = data.totalAmount.toLocaleString('hu-HU') + ' ft'
         column.appendChild(amountText)
-        amountText.style.transform = 'translate(-20%, -20px)';
+        amountText.style.transform = 'translate(-30%, -20px)';
 
         const dateText = document.createElement('div');
         dateText.classList.add('dateText')
         dateText.innerHTML = data.year + '<br>' + months[data.month - 1]
         column.appendChild(dateText)
-        dateText.style.position = 'absolute';
+        dateText.style.transform = 'translate(-25%, 35px)';
         dateText.style.bottom = '0'; // szülő alja
-        dateText.style.transform = 'translate(-25%, 45px)';
+
 
     }
     else
