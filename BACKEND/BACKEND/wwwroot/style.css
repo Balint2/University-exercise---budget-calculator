@@ -207,6 +207,51 @@ button:hover{
     width: 200%
 }
 
+
+
+@media (max-width: 1500px) {
+
+    .upperColumn, .lowerColumn, .emptyColumn {
+        width: 40px;
+    }
+
+    .amountText, .dateText { /*z-index: 1;*/
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 1200px) {
+
+    .upperColumn, .lowerColumn, .emptyColumn {
+        width: 30px;
+    }
+
+    .amountText, .dateText { /*z-index: 1;*/
+        font-size: 8px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .upperColumn, .lowerColumn, .emptyColumn {
+        width: 20px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .upperColumn, .lowerColumn, .emptyColumn {
+        width: 10px;
+    }
+
+}
+
+
+
+
+
 /* Reszponzív */
 @media (max-width: 768px) {
     h1 {
