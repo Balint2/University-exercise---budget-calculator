@@ -209,8 +209,13 @@ button:hover{
 
 
 
-@media (max-width: 1500px) {
+.diagram-title {
+       margin-bottom: 100px !important;
+}
 
+
+
+@media (max-width: 1500px) {
     .upperColumn, .lowerColumn, .emptyColumn {
         width: 40px;
     }
@@ -275,6 +280,7 @@ button:hover{
     button {
         width: 100%;
     }
+
 }
 
 

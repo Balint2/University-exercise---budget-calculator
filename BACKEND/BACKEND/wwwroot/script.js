@@ -199,9 +199,12 @@ function ShowStatistics(datas)
     const statisticsContainer = document.createElement('div');
     statisticsContainer.classList.add('section-container');
     statisticsContainer.classList.add('diagram-container');
-
-
-
+    
+    const title = document.createElement('h2');
+    title.classList.add('diagram-title');
+    title.classList.add('shadow');
+    title.innerHTML = 'Költségvetés elemzés'
+    statisticsContainer.appendChild(title)
 
 
     const upperGridContainer = document.createElement('div');
