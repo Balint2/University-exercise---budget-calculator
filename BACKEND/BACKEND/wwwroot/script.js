@@ -90,7 +90,7 @@ function addExpense() {
         <label>Hónap: </label>
         <select class="montChoosing" name="montChoosing">
             <option value=1>január</option>
-            <option value=1>február</option>
+            <option value=2>február</option>
             <option value=3>március</option>
             <option value=4>április</option>
             <option value=5>május</option>
@@ -218,7 +218,7 @@ function ShowStatistics(datas)
             addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / amountHeightRatio, (maxAmount - data.totalAmount) / amountHeightRatio, data)
         }
         else {
-            addColumn(upperGridContainer, Colors.WHITE, 10, 0, data)
+            addColumn(upperGridContainer, Colors.WHITE, maxAmount / amountHeightRatio, 0, data)
         }
 
     });
@@ -244,7 +244,7 @@ function ShowStatistics(datas)
             addColumn(lowerGridContainer, Colors.RED, -data.totalAmount / amountHeightRatio, 0, data)
         }
         else {
-            addColumn(lowerGridContainer, Colors.WHITE, 10, 0, data)
+            addColumn(lowerGridContainer, Colors.WHITE, -minAmount / amountHeightRatio, 0, data)
         }
 
     });
@@ -289,7 +289,7 @@ function addColumn(grid, color, height, transformAmount, data) {
         amountText.classList.add('amountText')
         amountText.innerHTML = data.totalAmount.toLocaleString('hu-HU') + ' ft'
         column.appendChild(amountText)
-        amountText.style.transform = 'translate(-30%, -20px)';
+        amountText.style.transform = 'translate(-25%, -20px)';
 
         const dateText = document.createElement('div');
         dateText.classList.add('dateText')
@@ -303,7 +303,7 @@ function addColumn(grid, color, height, transformAmount, data) {
     else
     {
         column.classList.add('emptyColumn')
-        column.style.height = '10px'
+        column.style.height = height + 'px'
     }
     grid.appendChild(column)
 }
