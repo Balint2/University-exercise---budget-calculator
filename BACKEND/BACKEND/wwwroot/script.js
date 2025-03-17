@@ -281,7 +281,7 @@ function addColumn(grid, color, height, transformAmount, data) {
         dateText.classList.add('dateText')
         dateText.innerHTML = data.year + '<br>' + months[data.month-1]
         column.appendChild(dateText)
-        dateText.style.transform = 'translate(-25%, -35px)';
+        dateText.style.transform = 'translate(-25%, -40px)';
     }
     else if (color == Colors.GREEN) {
         column.classList.add('upperColumn')
