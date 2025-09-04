@@ -1,3 +1,5 @@
+<h1>Simple Finance Tracker</h1>
+
 <p>
     This is a small web application consisting of a backend and a frontend.
     It allows users to enter their incomes and expenses for different months
