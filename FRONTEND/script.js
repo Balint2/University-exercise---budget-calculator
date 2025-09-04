@@ -55,7 +55,7 @@ function addIncome() {
         <label>Hónap: </label>
         <select class="montChoosing" name="montChoosing">
             <option value=1>január</option>
-            <option value=1>február</option>
+            <option value=2>február</option>
             <option value=3>március</option>
             <option value=4>április</option>
             <option value=5>május</option>
@@ -90,7 +90,7 @@ function addExpense() {
         <label>Hónap: </label>
         <select class="montChoosing" name="montChoosing">
             <option value=1>január</option>
-            <option value=1>február</option>
+            <option value=2>február</option>
             <option value=3>március</option>
             <option value=4>április</option>
             <option value=5>május</option>
@@ -122,11 +122,11 @@ addExpense()
 
 
 
-document.getElementById('showButton').addEventListener('click', function() {
-    const rows = incomesDiv.getElementsByClassName('input-container');
+document.getElementById('showButton').addEventListener('click', function () {
     let dataToSend = [];
 
-    for (let row of rows) {
+    const incomeRows = incomesDiv.getElementsByClassName('input-container');
+    for (let row of incomeRows) {
         const inputs = row.getElementsByTagName('input');
         let year = parseInt(inputs[0].value);
 
@@ -136,30 +136,177 @@ document.getElementById('showButton').addEventListener('click', function() {
         let amount = parseInt(inputs[2].value);
 
 
-        // Csak ha ki van töltve, hogy ne küldj üreset
-        if (isNaN(year) && isNaN(month) && isNaN(amount)) {
+        if (!isNaN(year) && !isNaN(month) && !isNaN(amount)) {
             dataToSend.push({
                 year: year,
                 month: month,
-                amount: amount
+                amount: amount,
+                isExpense: false
+            });
+        }
+    }
+
+    expenseRows = expensesDiv.getElementsByClassName('input-container');
+    for (let row of expenseRows) {
+        const inputs = row.getElementsByTagName('input');
+        let year = parseInt(inputs[0].value);
+
+
+        let month = row.getElementsByTagName('select')[0].value;
+        let type = inputs[1].value;
+        let amount = parseInt(inputs[2].value);
+
+
+        if (!isNaN(year) && !isNaN(month) && !isNaN(amount)) {
+            dataToSend.push({
+                year: year,
+                month: month,
+                amount: amount,
+                isExpense: true
             });
         }
     }
 
     // Küldés API-ra
-    fetch('https://localhost:5001/api/incomes', {
+    fetch('http://localhost:5000/api/statistics', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(dataToSend)
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Sikeres mentés!");
-        } else {
-            alert("Hiba történt a küldés során.");
-        }
-    })
+    .then(response => response.json())
+        .then(data => {
+            //console.log("Beérkezett adatok:", data);
+            ShowStatistics(data);
+        })
     .catch(error => console.error('Hiba:', error));
 });
+
+
+const Colors = {
+    RED: 'red',
+    GREEN: 'green',
+    WHITE: 'white'
+};
+
+function ShowStatistics(datas)
+{
+    const diagram = document.querySelector('.diagram-container');
+    if (diagram) {
+        diagram.remove();
+    }
+    const statisticsContainer = document.createElement('div');
+    statisticsContainer.classList.add('section-container');
+    statisticsContainer.classList.add('diagram-container');
+    
+    const title = document.createElement('h2');
+    title.classList.add('diagram-title');
+    title.classList.add('shadow');
+    title.innerHTML = 'Költségvetés elemzés'
+    statisticsContainer.appendChild(title)
+
+
+    const upperGridContainer = document.createElement('div');
+    upperGridContainer.classList.add('grid-container');
+
+    const maxAmount = Math.max(...datas.map(item => item.totalAmount));
+    const minAmount = Math.min(...datas.map(item => item.totalAmount));
+
+    biggest = Math.max(maxAmount, -minAmount)
+    const amountHeightRatio = biggest/350 //ez azt jelenti, hogy az osztó pixel lesz a legnagyobb magassága
+
+    datas.forEach(data => {
+        if (data.totalAmount >= 0) {
+            addColumn(upperGridContainer, Colors.GREEN, data.totalAmount / amountHeightRatio, (maxAmount - data.totalAmount) / amountHeightRatio, data)
+        }
+        else {
+            addColumn(upperGridContainer, Colors.WHITE, maxAmount / amountHeightRatio, 0, data)
+        }
+
+    });
+
+
+    statisticsContainer.appendChild(upperGridContainer)
+
+
+
+    const line = document.createElement('div');
+    line.classList.add('line')
+    statisticsContainer.appendChild(line)
+
+
+
+    const lowerGridContainer = document.createElement('div');
+    lowerGridContainer.classList.add('grid-container');
+
+
+
+    datas.forEach(data => {
+        if (data.totalAmount < 0) {
+            addColumn(lowerGridContainer, Colors.RED, -data.totalAmount / amountHeightRatio, 0, data)
+        }
+        else {
+            addColumn(lowerGridContainer, Colors.WHITE, -minAmount / amountHeightRatio, 0, data)
+        }
+
+    });
+
+
+
+
+    statisticsContainer.appendChild(lowerGridContainer)
+    document.body.appendChild(statisticsContainer)
+}
+
+const months = [
+    'január', 'február', 'március', 'április', 'május', 'június',
+    'július', 'augusztus', 'szeptember', 'október', 'november', 'december'
+];
+
+function addColumn(grid, color, height, transformAmount, data) {
+    const column = document.createElement('div');
+    if (color == Colors.RED) {
+        column.classList.add('lowerColumn')
+        column.style.height = height + 'px'
+
+        const amountText = document.createElement('div');
+        amountText.classList.add('amountText')
+        amountText.innerHTML = data.totalAmount.toLocaleString('hu-HU') + ' ft'
+        column.appendChild(amountText)
+        amountText.style.bottom = '0';
+        amountText.style.transform = 'translate(-25%, 20px)';
+
+        const dateText = document.createElement('div');
+        dateText.classList.add('dateText')
+        dateText.innerHTML = data.year + '<br>' + months[data.month-1]
+        column.appendChild(dateText)
+        dateText.style.transform = 'translate(-25%, -40px)';
+    }
+    else if (color == Colors.GREEN) {
+        column.classList.add('upperColumn')
+        column.style.height = height + 'px'
+        column.style.transform = 'translateY(' + transformAmount + 'px)';
+
+        const amountText = document.createElement('div');
+        amountText.classList.add('amountText')
+        amountText.innerHTML = data.totalAmount.toLocaleString('hu-HU') + ' ft'
+        column.appendChild(amountText)
+        amountText.style.transform = 'translate(-25%, -20px)';
+
+        const dateText = document.createElement('div');
+        dateText.classList.add('dateText')
+        dateText.innerHTML = data.year + '<br>' + months[data.month - 1]
+        column.appendChild(dateText)
+        dateText.style.transform = 'translate(-25%, 35px)';
+        dateText.style.bottom = '0'; // szülő alja
+
+
+    }
+    else
+    {
+        column.classList.add('emptyColumn')
+        column.style.height = height + 'px'
+    }
+    grid.appendChild(column)
+}

@@ -29,7 +29,7 @@ h1 {
 
     padding: 30px;
     margin: 50px auto;
-    max-width: 1700px; /* Maximális szélesség, hogy ne legyen túl széles */
+    max-width: 1400px; /* Maximális szélesség, hogy ne legyen túl széles */
     display: flex;
     flex-direction: column;
     align-items: center; /* Középre igazítás */
@@ -57,15 +57,15 @@ input[type="text"], input[type="number"], select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 20px;
-    min-width: 150px; /* Alap minimum méret */
+    font-size: 15px;
+    min-width: 50px; /* Alap minimum méret */
     margin-right: 20px;
 }
 
 /* Label */
 label {
     margin-left: 0;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 /* Gombok alap */
@@ -87,7 +87,7 @@ button:hover{
 
 /* Törlés gomb */
 .deleteButton {
-    padding: 8px 14px;
+    padding: 5px 10px;
     border-radius: 8px;
     border: none;
     background-color: #ff4d4d;
@@ -142,6 +142,121 @@ button:hover{
     background-color: #001180;
 }
 
+
+
+
+.diagram-container {
+    margin-top: 100px !important;
+    padding-top: 50px;
+    padding-bottom: 50px
+}
+
+
+.grid-container {
+    display: grid !important;
+    grid-template-columns: repeat(18, auto);
+    width: auto;
+    gap: 10px !important;
+}
+
+.upperColumn, .lowerColumn, .emptyColumn {
+    width: 50px;
+    /*z-index: 1;*/
+    position: relative;
+    /*overflow: visible;*/
+}
+
+
+.upperColumn {
+    background-color: lightgreen;
+
+}
+
+.lowerColumn {
+    background-color: indianred;
+}
+
+
+.emptyColumn {
+    background-color: transparent;
+}
+
+
+.line {
+    height: 2px;
+    background-color: black;
+    width: 100%; /* vagy pl. 50% ha rövidebbet akarsz */
+    margin: 0 auto; /* auto: középre */
+}
+
+.amountText, .dateText {/*z-index: 1;*/
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    font-size: 12px;
+    /*z-index: 100;*/
+
+
+}
+
+.amountText {
+    width: 200%
+}
+
+.dateText {
+    width: 200%
+}
+
+
+
+.diagram-title {
+       margin-bottom: 100px !important;
+}
+
+
+
+@media (max-width: 1500px) {
+    .upperColumn, .lowerColumn, .emptyColumn {
+        width: 40px;
+    }
+
+    .amountText, .dateText { /*z-index: 1;*/
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 1200px) {
+
+    .upperColumn, .lowerColumn, .emptyColumn {
+        width: 30px;
+    }
+
+    .amountText, .dateText { /*z-index: 1;*/
+        font-size: 8px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .upperColumn, .lowerColumn, .emptyColumn {
+        width: 20px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .upperColumn, .lowerColumn, .emptyColumn {
+        width: 10px;
+    }
+
+}
+
+
+
+
+
 /* Reszponzív */
 @media (max-width: 768px) {
     h1 {
@@ -165,4 +280,9 @@ button:hover{
     button {
         width: 100%;
     }
+
 }
+
+
+
+

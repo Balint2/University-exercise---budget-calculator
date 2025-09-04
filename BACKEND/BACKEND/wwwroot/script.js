@@ -55,7 +55,7 @@ function addIncome() {
         <label>Hónap: </label>
         <select class="montChoosing" name="montChoosing">
             <option value=1>január</option>
-            <option value=1>február</option>
+            <option value=2>február</option>
             <option value=3>március</option>
             <option value=4>április</option>
             <option value=5>május</option>
